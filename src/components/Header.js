@@ -1,3 +1,7 @@
+import * as React from 'react';
+import { Link, useLocation } from 'react-router'
+
+
 function Header(){
     return(
         <>
@@ -212,10 +216,10 @@ function Header(){
                   <ul id="navbar"
                     className="navbar-nav text-uppercase justify-content-start justify-content-lg-center align-items-start align-items-lg-center flex-grow-1">
                     <li className="nav-item">
-                      <a className="nav-link me-4 active" href="%PUBLIC_URL%/index.html">Home</a>
+                      <Link to={"/"} className="nav-link me-4">Home</Link>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link me-4" href="%PUBLIC_URL%/index.html">About</a>
+                      <Link to={"/about"} className="nav-link me-4">About</Link>
                     </li>
                     <li className="nav-item">
                       <a className="nav-link me-4" href="%PUBLIC_URL%/index.html">Shop</a>
