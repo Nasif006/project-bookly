@@ -1,3 +1,6 @@
+import * as React from 'react';
+import { Link, useLocation } from 'react-router'
+
 function Footer(){
     return(
         <>
