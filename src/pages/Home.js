@@ -1,8 +1,10 @@
-
+import * as React from 'react';
+import Weblayout from '../layout/Weblayout';
 
 function Home() {
   return (
-    <div classNameName="App">
+    <Weblayout>
+      <div classNameName="App">
         
 
         <section id="billboard" className="position-relative d-flex align-items-center py-5 bg-light-gray"
@@ -1214,6 +1216,7 @@ function Home() {
         </section>
  
     </div>
+    </Weblayout>
       
       );
     }
