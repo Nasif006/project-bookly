@@ -1,10 +1,10 @@
 <?php 
-include '../connection.php';
-include '../auth_check.php';
+include 'connection.php';
 
+$password=sha1($_POST['password']);
 if($_POST){
-	if($_POST['name']){
-		$sql = "insert into `categories` set name='{$_POST['name']}'";
+	if($_POST['name'] && $_POST['email'] && $_POST['password']){
+		$sql = "insert into `users` set name='{$_POST['name']}', email='{$_POST['email']}',contact_no='{$_POST['contact_no']}',password='$password'";
 		
 		$result=$db->query($sql);
 		if($result)

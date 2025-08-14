@@ -15,7 +15,8 @@ function Categories() {
   const handleShow = () => {
     setInputs({
             id:'',
-            name:''
+            name:'',
+            description: '',
         });
     setShow(true);
   }
@@ -25,17 +26,19 @@ function Categories() {
   }, []);
 
   const getDatas = async (e) => {
-    let res = await axios.get(`categories/list.php`)
+    let res = await axios.get(`crud_common/list.php?table_name=category`)
     setList(res.data);
   }
 
-  
   const handleSubmit = async(e) => {
     e.preventDefault();
 
     let datas={
-        name:e.target.name.value
+      table_name:'category',
+      name:e.target.name.value,
+      description:e.target.description.value
     }
+    
     datas ={...inputs, ...datas} // marge two object
    
     const formData = new FormData();
@@ -46,9 +49,9 @@ function Categories() {
     try{
       let url='';
       if(datas.id!=''){
-        url=`categories/update.php`;
+        url=`crud_common/update.php`;
       }else{
-        url=`categories/add.php`;
+        url=`crud_common/add.php`;
       }
      
       let response= await axios.post(url,formData);
@@ -71,7 +74,7 @@ function Categories() {
   }
 
   const deleteUser = async(id) => {
-    let res = await axios.get(`categories/delete.php?id=${id}`);
+    let res = await axios.get(`users/delete.php?id=${id}&table_name=category`);
     getDatas();
   }
 
@@ -89,6 +92,7 @@ function Categories() {
           <tr>
             <th>#SL</th>
             <th>Name</th>
+            <th>Description</th>
             <th>Action</th>
           </tr>
           </thead>
@@ -110,13 +114,18 @@ function Categories() {
       <Modal show={show} onHide={handleClose}>
         <form onSubmit={handleSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title>Add New</Modal.Title>
+            <Modal.Title>Add User</Modal.Title>
           </Modal.Header>
           <Modal.Body>
               <div className='form-group'>
                   <label htmlFor='name'>Name</label>
                   <input type='text' defaultValue={inputs.name} className='form-control' name="name" id='name'/>
               </div>
+              <div className='form-group'>
+                  <label htmlFor='description'>Description</label>
+                  <input type='text' defaultValue={inputs.description} className='form-control' name="description" id='description'/>
+              </div>
+
           </Modal.Body>
           <Modal.Footer>
             <Button variant="primary" type='submit'>

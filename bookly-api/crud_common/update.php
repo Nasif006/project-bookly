@@ -2,9 +2,8 @@
 include '../connection.php';
 include '../auth_check.php';
 
-
 if($_POST){
-	$sql = "update `categories` set name='{$_POST['name']}' where id='{$_POST['id']}'";
+	$sql = "update `{$_POST['table_name']}` set name='{$_POST['name']}' where id='{$_POST['id']}'";
 	
 	$result=$db->query($sql);
 	if($result)
