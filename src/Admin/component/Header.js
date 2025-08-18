@@ -24,7 +24,10 @@ function Header(){
                     <Link className="nav-link" to={"/admin/categories"}>Categories</Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to={"/admin/courses"}>Courses</Link>
+                    <Link className="nav-link" to={"/admin/author"}>Author</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to={"/admin/books"}>Books</Link>
                   </li>
                   
                 </ul>

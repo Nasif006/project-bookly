@@ -8,8 +8,8 @@ import Login from './Admin/Login';
 import Register from './Admin/Register';
 import Dashboard from './Admin/Dashboard';
 import Categories from './Admin/Categories';
-// import Author from './Admin/Author';
-// import Books from './Admin/Books';
+import Author from './Admin/Author';
+import Books from './Admin/Books';
 import Users from './Admin/Users';
 import Useradd from './Admin/Useradd';
 import Protected from './Admin/protected';
@@ -46,7 +46,7 @@ function App() {
                 <Categories /> 
               </Protected>
               } />
-            {/* <Route path= {"/admin/author"} element={
+            <Route path= {"/admin/author"} element={
               <Protected  isSignedIn= {isSignedIn} >
                 <Author /> 
               </Protected>
@@ -55,7 +55,7 @@ function App() {
               <Protected  isSignedIn= {isSignedIn} >
                 <Books /> 
               </Protected>
-              } /> */}
+              } />
             <Route path="/admin/add-user" element={<Useradd />} />
         </Routes>
         </>

@@ -4,7 +4,7 @@ import Adminlayout from '../layout/Adminlayout';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-function Categories() {
+function Author() {
   const [list,setList]=useState([]);
   const [show, setShow] = useState(false);
   const [inputs, setInputs] = useState([]);
@@ -26,7 +26,7 @@ function Categories() {
   }, []);
 
   const getDatas = async (e) => {
-    let res = await axios.get(`crud_common/list.php?table_name=category`)
+    let res = await axios.get(`crud_common/list.php?table_name=author`)
     setList(res.data);
   }
 
@@ -34,7 +34,7 @@ function Categories() {
     e.preventDefault();
 
     let datas={
-      table_name:'category',
+      table_name:'author',
       name:e.target.name.value,
       description:e.target.description.value
     }
@@ -74,7 +74,7 @@ function Categories() {
   }
 
   const deleteUser = async(id) => {
-    let res = await axios.get(`crud_common/delete.php?id=${id}&table_name=category`);
+    let res = await axios.get(`crud_common/delete.php?id=${id}&table_name=author`);
     getDatas();
   }
 
@@ -82,7 +82,7 @@ function Categories() {
   return (
     <Adminlayout>
       <div className='container'>
-        <h1>Categories</h1>
+        <h1>Authors</h1>
         
         <Button variant="primary" onClick={handleShow}>
           Add New
@@ -143,4 +143,4 @@ function Categories() {
 }
 
 
-export default Categories;
+export default Author;
