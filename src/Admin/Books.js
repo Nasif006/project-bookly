@@ -24,6 +24,7 @@ function Books() {
             price:'',
             category_id:'',
             author_id:'',
+            is_featured:'',
             review:''
         });
     getCate();
@@ -65,6 +66,7 @@ function Books() {
         price:e.target.price.value,
         category_id:e.target.category_id.value,
         author_id:e.target.author_id.value,
+        is_featured:e.target.is_featured.value,
         // review:e.target.review.value,
     }
     
@@ -132,6 +134,7 @@ function Books() {
               <th>Price</th>
               <th>category</th>
               <th>Author</th>
+              <th>Featured</th>
               <th>Review</th>
               <th>Image</th>
               <th>Action</th>
@@ -146,6 +149,7 @@ function Books() {
               <td>{d.price}</td>
               <td>{d.cat_name}</td>
               <td>{d.auth_name}</td>
+              <td>{d.is_featured}</td>
               <td>{d.review}</td>
               <td><img src={`${process.env.REACT_APP_API_URL}${d.image}`} width="100px"/></td>
               <td>
@@ -207,6 +211,16 @@ function Books() {
                         )}
                     </select>
                     )}
+                </div>
+              </div>
+              <div className='col-sm-4'>
+                <div className='form-group'>
+                  <label htmlFor='is_featured'>featured </label>
+                    <select defaultValue={inputs.is_featured} className='form-control' name="is_featured" id='is_featured'>
+                      <option key={0} value="">Select option</option>
+                      <option key={1} value="1">Yes</option>
+                      <option key={2} value="0">No</option>
+                    </select>
                 </div>
               </div>
               {/* <div className='col-sm-4'>

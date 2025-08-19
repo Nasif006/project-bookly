@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router';
 import About from './pages/About';
 import Home from './pages/Home';
+import { CartProvider, useCart } from "react-use-cart";
+
+import Cart from './pages/Cart';
+
 
 // admin route
 import Login from './Admin/Login';
@@ -24,11 +28,14 @@ function App() {
 
   return (
         <>
+        <CartProvider>
           <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+
+          <Route path='/cart' element={<Cart/>}/>
           
           {/* Admin route */}
           <Route path= {"/admin/dashboard"} element={
@@ -58,6 +65,7 @@ function App() {
               } />
             <Route path="/admin/add-user" element={<Useradd />} />
         </Routes>
+        </CartProvider>
         </>
       );
     }

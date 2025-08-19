@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Link, useLocation } from 'react-router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import { useCart } from "react-use-cart";
 
 /* import all the icons in Free Solid, Free Regular, and Brands styles */
 import { fas } from '@fortawesome/free-solid-svg-icons'
@@ -11,6 +12,8 @@ import { fab } from '@fortawesome/free-brands-svg-icons'
 
 function Header(){
   library.add(fas, far, fab)
+
+  const { totalUniqueItems } = useCart();
     return(
         <>
            
@@ -137,7 +140,7 @@ function Header(){
                       </a>
                     </li>
                     <li className="nav-item">
-                      <a className="nav-link me-4" href="%PUBLIC_URL%/index.html">Blogs</a>
+                      <Link to={"/cart"} className="nav-link me-4">View Cart</Link>
                     </li>
                     <li className="nav-item dropdown">
                       <a className="nav-link me-4 dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
@@ -300,9 +303,9 @@ function Header(){
                       <li className="cart-dropdown dropdown">
                         <a href="%PUBLIC_URL%/index.html" className="dropdown-toggle" data-bs-toggle="dropdown" role="button"
                           aria-expanded="false">
-                          <svg className="cart">
-                            
-                          </svg><span className="fs-6 fw-light">(02)</span>
+                            Cart
+                          {/* <font-awesome-icon icon="fa-solid fa-cart-shopping" /> */}
+                          <span className="fs-6 fw-light">-({totalUniqueItems})</span>
                         </a>
                         <div className="dropdown-menu animate slide dropdown-menu-start dropdown-menu-lg-end p-3">
                           <h4 className="d-flex justify-content-between align-items-center mb-3">

@@ -1,7 +1,51 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import Weblayout from '../layout/Weblayout';
+import axios from '../Admin/component/axios';
+import { useCart } from "react-use-cart";
+
 
 function Home() {
+  const { addItem } = useCart();
+
+const [featured, setFeatured] = useState([]);
+const [newCome, setNewCome] = useState([]);
+
+// categories:
+const [fiction, setFiction] = useState([]);
+const [documentary, setDocumentary] = useState([]);
+const [business, setBusiness] = useState([]);
+const [biography, setBiography] = useState([]);
+const [informational, setInformational] = useState([]);
+
+useEffect(() => {
+  getBooks();
+}, []);
+
+const getBooks = async () => {
+  let feat = await axios.get(`front_api/books.php?query_type=featured&limit=4`);
+  setFeatured(feat.data);
+
+  let newC = await axios.get(`front_api/books.php?query_type=new_product&limit=3`);
+  setNewCome(newC.data);
+
+  // fetches for other categories:
+  let fic = await axios.get(`front_api/books.php?query_type=fiction&limit=3`);
+  setFiction(fic.data);
+
+  let doc = await axios.get(`front_api/books.php?query_type=documentary&limit=3`);
+  setDocumentary(doc.data);
+
+  let bus = await axios.get(`front_api/books.php?query_type=business&limit=3`);
+  setBusiness(bus.data);
+
+  let bio = await axios.get(`front_api/books.php?query_type=biography&limit=3`);
+  setBiography(bio.data);
+
+  let info = await axios.get(`front_api/books.php?query_type=informational&limit=3`);
+  setInformational(info.data);
+};
+
+
   return (
     <Weblayout>
       <div classNameName="App">
@@ -141,7 +185,7 @@ function Home() {
         <section id="best-selling-items" className="position-relative padding-large ">
           <div className="container">
             <div className="section-title d-md-flex justify-content-between align-items-center mb-4">
-              <h3 className="d-flex align-items-center">Best selling items</h3>
+              <h3 className="d-flex align-items-center">Featured</h3>
               <a href="%PUBLIC_URL%/index.html" className="btn">View All</a>
             </div>
             <div className="position-absolute top-50 end-0 pe-0 pe-xxl-5 me-0 me-xxl-5 swiper-next product-slider-button-next">
@@ -155,47 +199,51 @@ function Home() {
               </svg>
             </div>
             <div className="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
-  {[
-    {
-      img: "assets/images/product-item1.png",
-      title: "House of Sky Breath",
-      author: "Lauren Asher",
-      price: "$870",
-      offer: "10% off",
-    },
-    {
-      img: "assets/images/product-item2.png",
-      title: "Heartland Stars",
-      author: "Lauren Asher",
-      price: "$870",
-    },
-    {
-      img: "assets/images/product-item3.png",
-      title: "Heavenly Bodies",
-      author: "Lauren Asher",
-      price: "$870",
-    },
-    {
-      img: "assets/images/product-item4.png",
-      title: "His Saving Grace",
-      author: "Lauren Asher",
-      price: "$870",
-      offer: "10% off",
-    },
-  ].map((book, index) => (
-    <div className="col" key={index}>
+  {
+  
+  // [
+  //   {
+  //     img: "assets/images/product-item1.png",
+  //     title: "House of Sky Breath",
+  //     author: "Lauren Asher",
+  //     price: "$870",
+  //     offer: "10% off",
+  //   },
+  //   {
+  //     img: "assets/images/product-item2.png",
+  //     title: "Heartland Stars",
+  //     author: "Lauren Asher",
+  //     price: "$870",
+  //   },
+  //   {
+  //     img: "assets/images/product-item3.png",
+  //     title: "Heavenly Bodies",
+  //     author: "Lauren Asher",
+  //     price: "$870",
+  //   },
+  //   {
+  //     img: "assets/images/product-item4.png",
+  //     title: "His Saving Grace",
+  //     author: "Lauren Asher",
+  //     price: "$870",
+  //     offer: "10% off",
+  //   },
+  // ]
+  
+  featured.length > 0 && featured.map((d, key) => (
+    <div className="col" key={d.id}>
       <div className="card position-relative p-4 border rounded-3 h-100">
-        {book.offer && (
+        {/* {book.offer && (
           <div className="position-absolute">
             <p className="bg-primary py-1 px-3 fs-6 text-white rounded-2">{book.offer}</p>
           </div>
-        )}
-        <img src={book.img} className="img-fluid shadow-sm" alt={book.title} />
+        )} */}
+        <img src={`${process.env.REACT_APP_API_URL}${d.image}`} className="img-fluid shadow-sm" alt={d.name} />
         <h6 className="mt-4 mb-0 fw-bold">
-          <a href="/">{book.title}</a>
+          <a href="/">{d.name}</a>
         </h6>
         <div className="review-content d-flex">
-          <p className="my-2 me-2 fs-6 text-black-50">{book.author}</p>
+          <p className="my-2 me-2 fs-6 text-black-50">{d.auth_name}</p>
           <div className="rating text-warning d-flex align-items-center">
             {[...Array(5)].map((_, i) => (
               <svg className="star star-fill" key={i}>
@@ -204,14 +252,14 @@ function Home() {
             ))}
           </div>
         </div>
-        <span className="price text-primary fw-bold mb-2 fs-5">{book.price}</span>
+        <span className="price text-primary fw-bold mb-2 fs-5">{d.price}</span>
         <div className="card-concern position-absolute start-0 end-0 d-flex gap-2">
-          <button type="button" className="btn btn-dark">
-            <svg className="cart">{/* Insert cart SVG */}</svg>
+          <button type="button" className="btn btn-dark" onClick={() => addItem(d)}> Add to cart
+            {/*<svg className="cart"> Insert cart SVG </svg>*/}
           </button>
-          <a href="#" className="btn btn-dark">
-            <svg className="wishlist">{/* Insert wishlist SVG */}</svg>
-          </a>
+         {/* <a href="#" className="btn btn-dark">
+            <svg className="wishlist"> Insert wishlist SVG </svg>
+          </a>*/}
         </div>
       </div>
     </div>
@@ -538,15 +586,17 @@ function Home() {
               <div className="col-md-6 mb-4 mb-lg-0 col-lg-3">
                 <div className="featured border rounded-3 p-4">
                   <div className="section-title overflow-hidden mb-5 mt-2">
-                    <h3 className="d-flex flex-column mb-0">Featured</h3>
+                    <h3 className="d-flex flex-column mb-0">Fiction</h3>
                   </div>
                   <div className="items-lists">
-                    <div className="item d-flex">
-                      <img src="assets/images/product-item2.png" className="img-fluid shadow-sm" alt="product item"/>
+                    {
+                      fiction.length > 0 && fiction.map((d, key) =>
+                      <div className="item d-flex">
+                      <img src={`${process.env.REACT_APP_API_URL}${d.image}`} className="img-fluid shadow-sm" alt="product item"/>
                       <div className="item-content ms-3">
-                        <h6 className="mb-0 fw-bold"><a href="%PUBLIC_URL%/index.html">Echoes of the Ancients</a></h6>
+                        <h6 className="mb-0 fw-bold"><a href="%PUBLIC_URL%/index.html">{d.name}</a></h6>
                         <div className="review-content d-flex">
-                          <p className="my-2 me-2 fs-6 text-black-50">Lauren Asher</p>
+                          <p className="my-2 me-2 fs-6 text-black-50">{d.auth_name}</p>
 
                           <div className="rating text-warning d-flex align-items-center">
                             <svg className="star star-fill">
@@ -566,9 +616,11 @@ function Home() {
                             </svg>
                           </div>
                         </div>
-                        <span className="price text-primary fw-bold mb-2 fs-5">$870</span>
+                        <span className="price text-primary fw-bold mb-2 fs-5">{d.price}</span>
                       </div>
-                    </div>
+                      </div>
+                      )
+                    }
                     <hr className="gray-400"/>
                     <div className="item d-flex">
                       <img src="assets/images/product-item1.png" className="img-fluid shadow-sm" alt="product item"/>
