@@ -29,6 +29,12 @@ function Header(){
                   <li className="nav-item">
                     <Link className="nav-link" to={"/admin/books"}>Books</Link>
                   </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to={"/admin/coupon"}>Coupons</Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" to={"/admin/orders"}>Orders</Link>
+                  </li>
                   
                 </ul>
                 <button className="btn btn-link" onClick={logout}>Logout</button>

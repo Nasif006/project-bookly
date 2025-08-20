@@ -41,8 +41,7 @@ function Cart () {
                     <p>Very us move be blessed multiply night</p>
                   </div>
                   <div className="page_link">
-                    <a href="index.html">Home</a>
-                    <a href="cart.html">Cart</a>
+                    <button type="button" className="btn btn-primary"><Link to={"/"} className="nav-link me-4"><a>Home</a></Link></button>          
                   </div>
                 </div>
               </div>
@@ -91,18 +90,18 @@ function Cart () {
                               title="Quantity:"
                               className="input-text qty"
                             />
-                            <button
+                            &nbsp;<button
                               onClick={() => updateItemQuantity(d.id, (d.quantity ?? 0) + 1)}
-                              className="increase items-count"
+                              className="btn"
                               type="button"
-                            >
+                            ><b>+</b>
                               <i className="lnr lnr-chevron-up"></i>
                             </button>
                             <button
                               onClick={() => updateItemQuantity(d.id, (d.quantity ?? 0) - 1)}
-                              className="reduced items-count"
+                              className="btn"
                               type="button"
-                            >
+                            ><b>-</b>
                               <i className="lnr lnr-chevron-down"></i>
                             </button>
                           </div>
@@ -156,11 +155,12 @@ function Cart () {
                       <tr className="out_button_area">
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td><Link to={'/'} className="btn" href="#">Continue Shopping</Link></td>
                         <td>
+                          <td></td>
+                          <td></td>
                           <div className="checkout_btn_inner">
-                            <Link to={'/'} className="gray_btn" href="#">Continue Shopping</Link>
-                            <Link to={'/checkout'} className="main_btn" href="#">Proceed to checkout</Link>
+                            <Link to={'/checkout'} className="btn" href="#">Proceed to checkout</Link>
                           </div>
                         </td>
                       </tr>

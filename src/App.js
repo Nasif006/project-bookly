@@ -5,6 +5,8 @@ import Home from './pages/Home';
 import { CartProvider, useCart } from "react-use-cart";
 
 import Cart from './pages/Cart';
+import Shop_Category from './pages/Shop_Category';
+import Checkout from './pages/Checkout';
 
 
 // admin route
@@ -17,6 +19,8 @@ import Books from './Admin/Books';
 import Users from './Admin/Users';
 import Useradd from './Admin/Useradd';
 import Protected from './Admin/protected';
+import Coupon from './Admin/Coupon';
+import Orders from './Admin/Orders';
 
 function App() {
   const [ isSignedIn, setIsSignedIn ] = useState(()=> {
@@ -28,44 +32,57 @@ function App() {
 
   return (
         <>
-        <CartProvider>
-          <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <CartProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
 
-          <Route path='/cart' element={<Cart/>}/>
-          
-          {/* Admin route */}
-          <Route path= {"/admin/dashboard"} element={
-            <Protected  isSignedIn= {isSignedIn} >
-              <Dashboard /> 
-           </Protected>
-           } />
-          <Route path= {"/admin/user"} element={
-            <Protected  isSignedIn= {isSignedIn} >
-              <Users /> 
-           </Protected>
-           } />
-           <Route path= {"/admin/categories"} element={
-              <Protected  isSignedIn= {isSignedIn} >
-                <Categories /> 
+              <Route path='/cart' element={<Cart/>}/>
+
+              <Route path='/Shop_Category' element={<Shop_Category/>}/>
+              <Route path='/checkout' element={<Checkout/>}/>
+              
+              {/* Admin route */}
+              <Route path= {"/admin/dashboard"} element={
+                <Protected  isSignedIn= {isSignedIn} >
+                  <Dashboard /> 
               </Protected>
               } />
-            <Route path= {"/admin/author"} element={
-              <Protected  isSignedIn= {isSignedIn} >
-                <Author /> 
+              <Route path= {"/admin/user"} element={
+                <Protected  isSignedIn= {isSignedIn} >
+                  <Users /> 
               </Protected>
               } />
-            <Route path= {"/admin/books"} element={
-              <Protected  isSignedIn= {isSignedIn} >
-                <Books /> 
-              </Protected>
-              } />
-            <Route path="/admin/add-user" element={<Useradd />} />
-        </Routes>
-        </CartProvider>
+              <Route path= {"/admin/categories"} element={
+                <Protected  isSignedIn= {isSignedIn} >
+                  <Categories /> 
+                </Protected>
+                } />
+              <Route path= {"/admin/author"} element={
+                <Protected  isSignedIn= {isSignedIn} >
+                  <Author /> 
+                </Protected>
+                } />
+              <Route path= {"/admin/books"} element={
+                <Protected  isSignedIn= {isSignedIn} >
+                  <Books /> 
+                </Protected>
+                } />
+                <Route path= {"/admin/coupon"} element={
+                    <Protected  isSignedIn= {isSignedIn} >
+                      <Coupon /> 
+                    </Protected>
+                    } />
+                <Route path= {"/admin/orders"} element={
+                    <Protected  isSignedIn= {isSignedIn} >
+                      <Orders /> 
+                    </Protected>
+                    } />
+              <Route path="/admin/add-user" element={<Useradd />} />
+          </Routes>
+          </CartProvider>
         </>
       );
     }
