@@ -7,6 +7,7 @@ import { CartProvider, useCart } from "react-use-cart";
 import Cart from './pages/Cart';
 import Shop_Category from './pages/Shop_Category';
 import Checkout from './pages/Checkout';
+import ThankYouPage from './pages/thanku';
 
 
 // admin route
@@ -43,6 +44,7 @@ function App() {
 
               <Route path='/Shop_Category' element={<Shop_Category/>}/>
               <Route path='/checkout' element={<Checkout/>}/>
+              <Route path='/thanku' element={<ThankYouPage/>}/>
               
               {/* Admin route */}
               <Route path= {"/admin/dashboard"} element={

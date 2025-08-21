@@ -9,6 +9,7 @@ function Home() {
 
 const [featured, setFeatured] = useState([]);
 const [newCome, setNewCome] = useState([]);
+const [discount, setDisc] = useState([]);
 
 // categories:
 const [fiction, setFiction] = useState([]);
@@ -27,6 +28,9 @@ const getBooks = async () => {
 
   let newC = await axios.get(`front_api/books.php?query_type=new_product&limit=3`);
   setNewCome(newC.data);
+
+  let disc = await axios.get(`front_api/books.php?query_type=discount&limit=3`);
+  setDisc(disc.data);
 
   // fetches for other categories:
   let fic = await axios.get(`front_api/books.php?query_type=fiction&limit=3`);
@@ -953,11 +957,11 @@ const getBooks = async () => {
               <div className="col-md-6 mb-4 mb-lg-0 col-lg-3">
                 <div className="on-sale border rounded-3 p-4">
                   <div className="section-title overflow-hidden mb-5 mt-2">
-                    <h3 className="d-flex flex-column mb-0">On sale</h3>
+                    <h3 className="d-flex flex-column mb-0">Biography</h3>
                   </div>
                   <div className="items-lists">
                     {
-                      business.length > 0 && business.map((d, key) =>
+                      biography.length > 0 && biography.map((d, key) =>
                         <>
                       <div className="item d-flex">
                       <img src={`${process.env.REACT_APP_API_URL}${d.image}`} className="img-fluid shadow-sm" alt="product item"/>
@@ -995,7 +999,8 @@ const getBooks = async () => {
                       </>
                       )
                     }
-                    <div className="item d-flex">
+
+                    {/* <div className="item d-flex">
                       <img src="assets/images/product-item10.png" className="img-fluid shadow-sm" alt="product item"/>
                       <div className="item-content ms-3">
                         <h6 className="mb-0 fw-bold"><a href="%PUBLIC_URL%/index.html">The Phoenix Chronicles</a></h6>
@@ -1080,7 +1085,7 @@ const getBooks = async () => {
                         <span className="price text-primary fw-bold mb-2 fs-5"><s className="text-black-50">$600</s>
                           $500</span>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

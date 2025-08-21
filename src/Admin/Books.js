@@ -22,6 +22,7 @@ function Books() {
             name:'',
             description:'',
             price:'',
+            discount:'',
             category_id:'',
             author_id:'',
             is_featured:'',
@@ -64,6 +65,7 @@ function Books() {
         name:e.target.name.value,
         description:e.target.description.value,
         price:e.target.price.value,
+        discount:e.target.discount.value,
         category_id:e.target.category_id.value,
         author_id:e.target.author_id.value,
         is_featured:e.target.is_featured.value,
@@ -132,6 +134,7 @@ function Books() {
               <th>Name</th>
               <th>Description</th>
               <th>Price</th>
+              <th>Discount</th>
               <th>category</th>
               <th>Author</th>
               <th>Featured</th>
@@ -147,6 +150,7 @@ function Books() {
               <td>{d.name}</td>
               <td>{d.description}</td>
               <td>{d.price}</td>
+              <td>{d.discount}</td>
               <td>{d.cat_name}</td>
               <td>{d.auth_name}</td>
               <td>{d.is_featured}</td>
@@ -181,12 +185,12 @@ function Books() {
                   <input type='text' defaultValue={inputs.price} className='form-control' name="price" id='price'/>
                 </div>
               </div>
-              {/* <div className='col-sm-3'>
+              <div className='col-sm-3'>
                 <div className='form-group'>
                   <label htmlFor='discount'>Discount</label>
                   <input type='text' defaultValue={inputs.discount} className='form-control' name="discount" id='discount'/>
                 </div>
-              </div> */}
+              </div>
               <div className='col-sm-4'>
                 <div className='form-group'>
                   <label htmlFor='category_id'>Category </label>
