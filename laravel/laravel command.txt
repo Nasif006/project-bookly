@@ -1,0 +1,37 @@
+*composer create-project "laravel/laravel:^10.0" wallet
+
+
+to run application/website
+*php artisan serve 
+
+if you download a laravel project from github then run this command
+*composer install
+*cp .env.example .env
+*php artisan key:generate
+
+
+to create a category crud
+*php artisan make:model Category -m -r
+	this command will make 
+	1. model in model folder ( we will add protected fillable variable with all the column name except id and created_at and updated_at
+	2. migration file in database/migrations (we will add more column whatever we need)
+	3. controller in app/http/controllers folder ( we will get all 7 function what we need for CRUD, we have to update function)
+
+*php artisan migrate
+	it will create a table in database
+
+authentication
+*composer require laravel/ui
+*php artisan ui bootstrap --auth
+*npm install
+*npm run build
+
+
+
+
+*git clone https://github.com/ether0606/wallet
+*cd wallet
+*composer install
+*cp .env.example .env
+*php artisan key:generate
+*php artisan migrate
